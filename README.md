@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Games on your Mac, without the usual VM baggage.</strong>
+  <strong>Play Windows games on Apple Silicon Macs</strong>
 </p>
 
 <p align="center">
@@ -12,9 +12,9 @@
 
 ---
 
-**Impulse** is a virtual machine for Apple Silicon Macs built for real workloads — gaming, development, creative tools, and general desktop use. You get a full Linux desktop inside a window, with graphics that actually use your Mac’s GPU — not a sluggish software renderer hiding behind layers of emulation.
+Impulse is a lightweight virtual machine for Apple Silicon Macs, built with gaming in mind. It runs KDE Plasma in a window and uses your Mac’s GPU for Vulkan and OpenGL instead of falling back to software rendering.
 
-It’s lighter than a typical VM setup because it was designed around performance from the start. We ship **KDE Plasma** as the desktop environment — a full, modern Linux desktop that handles games, dev workflows, and day-to-day apps without feeling like a stripped-down sandbox.
+Use it to run Windows games through Proton, Linux games, development tools, or just a regular Linux desktop. x86 Linux applications can also run through FEX.
 
 ## What you need
 
@@ -23,9 +23,11 @@ It’s lighter than a typical VM setup because it was designed around performanc
 
 ## Getting started
 
+**Watch the walkthrough:** [Getting started with Impulse](https://youtu.be/3J96V699CGA)
+
 **1.** Download the latest build from [**Releases**](https://github.com/Zonharo/impulse/releases), or build the app yourself (see [Building](#building)).
 
-**2.** Grab a config file from [`examples/gaming.impulse`](examples/gaming.impulse), or create one with:
+**2.** Grab a config file from [`examples/gaming.impulse`](examples/gaming.impulse), or paste this into **Terminal** to create one:
 
 ```bash
 cat > "$HOME/gaming.impulse" <<'EOF'
@@ -35,17 +37,19 @@ memory_mib = 16384
 vcpus = 8
 
 disk = "gaming.raw"
-disk_size_gib = 24
+disk_size_gib = 24 // You cannot shrink it
 EOF
 ```
 
-The virtual disk appears next to the config file. To make it bigger later, stop the VM, bump `disk_size_gib`, and launch again. You can’t shrink it.
+The file lands in your home folder (`gaming.impulse` in the main user directory on your Mac). Move it — and keep it — wherever you want your VM files. The virtual disk image is created next to the config file in that same folder. Choose `disk_size_gib` with care — you can **grow the disk later** by stopping the VM, increasing the value, and launching again, but **you cannot shrink it** once the disk image exists.
 
 **3.** Open Impulse and pick your `.impulse` file.
 
 If macOS blocks the app on first launch (it isn’t signed or notarized), go to **System Settings → Privacy & Security → Open Anyway**.
 
-**4.** Wait for Linux to boot, set up a user, and log in. Booting takes about **30–45 seconds** — that’s normal. The first run takes a bit longer while Impulse finishes setting things up in the background.
+**4.** Wait for Linux to boot, set up a user, and log in.
+
+Every launch takes a moment to get going — that’s normal. **The first launch takes significantly longer** while Impulse finishes setting up the guest in the background; let it complete before judging boot time.
 
 **5.** Open **Applications → Games → Steam**, sign in, install something, and play — or use the desktop for whatever you need.
 
@@ -59,8 +63,6 @@ If macOS blocks the app on first launch (it isn’t signed or notarized), go to 
 | **Day-to-day** | Sound, networking, shared clipboard, Retina and high-refresh displays |
 
 DirectX 9–11 games tend to work best today. Newer APIs are still catching up.
-
-Performance demos and a full configuration guide are coming soon.
 
 ## Building
 
@@ -80,17 +82,6 @@ make run
 ```
 
 That uses `examples/gaming.impulse` by default.
-
-## Config files
-
-VMs are described by `.impulse` files (plain TOML). The essentials:
-
-- `memory_mib` — RAM
-- `vcpus` — CPU cores
-- `disk` — path to the disk image
-- `disk_size_gib` — how big the virtual disk should be
-
-See [`examples/gaming.impulse`](examples/gaming.impulse) for a working template.
 
 ## Thanks
 

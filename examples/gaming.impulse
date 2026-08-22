@@ -1,7 +1,7 @@
 format_version = 1
 
 memory_mib = 16384
-vcpus = 12
+vcpus = 8
 
 disk = "gaming.raw"
-disk_size_gib = 100
+disk_size_gib = 32
