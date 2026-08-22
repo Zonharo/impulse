@@ -1,0 +1,12 @@
+[Unit]
+Description=Set Impulse guest time zone from geolocation
+Wants=network-online.target
+After=network-online.target systemd-timesyncd.service
+ConditionPathExists=/usr/local/libexec/impulse-timezone
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/impulse-timezone
+
+[Install]
+WantedBy=multi-user.target

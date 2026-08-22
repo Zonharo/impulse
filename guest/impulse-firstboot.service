@@ -1,0 +1,22 @@
+[Unit]
+Description=Set up Impulse
+Wants=network-online.target systemd-time-wait-sync.service
+Requires=impulse-grow-root.service
+After=systemd-user-sessions.service network-online.target systemd-time-wait-sync.service impulse-grow-root.service
+Before=getty@tty1.service
+ConditionPathExists=!/var/lib/impulse/firstboot.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/impulse-firstboot
+StandardInput=tty-force
+StandardOutput=tty
+StandardError=tty
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

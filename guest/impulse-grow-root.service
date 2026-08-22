@@ -1,0 +1,11 @@
+[Unit]
+Description=Grow Impulse root filesystem
+After=local-fs.target
+Before=impulse-firstboot.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/impulse-grow-root
+
+[Install]
+WantedBy=multi-user.target

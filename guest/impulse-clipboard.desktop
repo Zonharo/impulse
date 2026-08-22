@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Impulse Clipboard
+Comment=Synchronize the guest and host clipboards
+Exec=/usr/local/libexec/impulse-clipboard-agent
+NoDisplay=true
+StartupNotify=false
+Terminal=false

@@ -1,0 +1,43 @@
+#!/bin/sh
+# Detect the guest time zone from IP geolocation and apply it with timedatectl.
+# Runs once per boot after the network is online. Failures never block boot: if
+# geolocation is unavailable the guest simply keeps its current (UTC) zone.
+set -eu
+
+ZONEINFO=/usr/share/zoneinfo
+
+fetch_timezone() {
+    # Print an IANA time zone (e.g. Europe/Warsaw) reported for this host's public
+    # IP address. Two providers are tried so a single outage does not break it.
+    for url in \
+        'https://ipapi.co/timezone' \
+        'http://ip-api.com/line?fields=timezone'; do
+        timezone="$(curl --fail --silent --show-error --location --max-time 10 "$url" 2>/dev/null | tr -d '[:space:]')" || timezone=''
+        # A valid answer always looks like Region/City; error pages never do.
+        case "$timezone" in
+            */*)
+                printf '%s\n' "$timezone"
+                return 0
+                ;;
+        esac
+    done
+    return 1
+}
+
+timezone="$(fetch_timezone)" || {
+    echo 'impulse-timezone: could not determine time zone from geolocation' >&2
+    exit 0
+}
+
+if [ ! -f "$ZONEINFO/$timezone" ]; then
+    echo "impulse-timezone: geolocation returned unknown time zone '$timezone'" >&2
+    exit 0
+fi
+
+current="$(timedatectl show --property=Timezone --value 2>/dev/null || echo '')"
+if [ "$current" = "$timezone" ]; then
+    exit 0
+fi
+
+timedatectl set-timezone "$timezone"
+echo "impulse-timezone: set time zone to $timezone" >&2
