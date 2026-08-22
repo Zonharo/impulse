@@ -23,7 +23,11 @@ Use it to run Windows games through Proton, Linux games, development tools, or j
 
 ## Getting started
 
-**Watch the walkthrough:** [Getting started with Impulse](https://youtu.be/3J96V699CGA)
+<p align="center">
+  <a href="https://youtu.be/3J96V699CGA">
+    <img src="https://img.youtube.com/vi/3J96V699CGA/maxresdefault.jpg" alt="Getting started with Impulse" width="100%">
+  </a>
+</p>
 
 **1.** Download the latest build from [**Releases**](https://github.com/Zonharo/impulse/releases), or build the app yourself (see [Building](#building)).
 
@@ -37,11 +41,11 @@ memory_mib = 16384
 vcpus = 8
 
 disk = "gaming.raw"
-disk_size_gib = 24 // You cannot shrink it
+disk_size_gib = 32 // You cannot shrink it
 EOF
 ```
 
-The file lands in your home folder (`gaming.impulse` in the main user directory on your Mac). Move it — and keep it — wherever you want your VM files. The virtual disk image is created next to the config file in that same folder. Choose `disk_size_gib` with care — you can **grow the disk later** by stopping the VM, increasing the value, and launching again, but **you cannot shrink it** once the disk image exists.
+The file lands in your home folder (`gaming.impulse` in the main user directory on your Mac). Move it and keep it wherever you want your VM files. The virtual disk image is created next to the config file in that same folder. Choose `disk_size_gib` with care — you can **grow the disk later** by stopping the VM, increasing the value, and launching again, but **you cannot shrink it** once the disk image exists.
 
 **3.** Open Impulse and pick your `.impulse` file.
 
