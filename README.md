@@ -41,7 +41,7 @@ memory_mib = 16384
 vcpus = 8
 
 disk = "gaming.raw"
-disk_size_gib = 32 // You cannot shrink it
+disk_size_gib = 32 # You cannot shrink it
 EOF
 ```
 
