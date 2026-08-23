@@ -23,10 +23,18 @@ Use it to run Windows games through Proton, Linux games, development tools, or j
 
 ## Getting started
 
+### Watch the setup walkthrough
+
 <p align="center">
-  <a href="https://youtu.be/3J96V699CGA">
-    <img src="https://img.youtube.com/vi/3J96V699CGA/maxresdefault.jpg" alt="Getting started with Impulse" width="100%">
+  <a href="https://youtu.be/3J96V699CGA" title="Watch getting started with Impulse on YouTube">
+    <img src="https://img.youtube.com/vi/3J96V699CGA/maxresdefault.jpg" alt="Getting started with Impulse — click to play on YouTube" width="100%">
   </a>
+  <br><br>
+  <a href="https://youtu.be/3J96V699CGA">
+    <img src="https://img.shields.io/badge/YouTube-▶%20Watch%20getting%20started-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch getting started on YouTube">
+  </a>
+  <br><br>
+  <em>Click the thumbnail or the button above to open the video on YouTube.</em>
 </p>
 
 **1.** Download the latest build from [**Releases**](https://github.com/Zonharo/impulse/releases), or build the app yourself (see [Building](#building)).
@@ -41,7 +49,7 @@ memory_mib = 16384
 vcpus = 8
 
 disk = "gaming.raw"
-disk_size_gib = 32 # You cannot shrink it
+disk_size_gib = 32 // You cannot shrink it
 EOF
 ```
 
